@@ -11,12 +11,16 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -36,6 +40,7 @@ public class InputDiaryFragment extends Fragment {
     private Realm mRealm;
     private EditText mTitleEdit;
     private EditText mBodyEdit;
+    private Button mButton;
     private ImageView
             mDiaryImage;
 
@@ -77,6 +82,18 @@ public class InputDiaryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 requestReadStorage(view);
+            }
+        });
+        mButton = (Button)v.findViewById(R.id.backButton);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+
+                transaction.replace(R.id.content ,DiaryListFragment.newInstance());
+
+                transaction.commit();
             }
         });
         mTitleEdit.addTextChangedListener(new TextWatcher() {

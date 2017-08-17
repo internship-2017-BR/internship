@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         mRealm = Realm.getDefaultInstance();
 
-        createTestData();
+        //createTestData();
         showDiaryList();
 
     }

@@ -4,34 +4,39 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="vertical">
+              android:orientation="vertical"
+    android:weightSum="1">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp">
+        android:layout_margin="16dp"
+        android:layout_weight="1.09">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="131dp">
+
 
             <ImageView
                 android:id="@+id/diary_photo"
                 android:layout_width="100dp"
                 android:layout_height="86dp"
                 android:layout_marginBottom="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginRight="24dp"
                 android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_no_image"/>
+                app:srcCompat="@drawable/ic_no_image"
+                app:layout_constraintVertical_bias="0.0"
+                android:layout_marginEnd="24dp" />
 
             <TextView
                 android:id="@+id/title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="164dp"
+                android:layout_height="33dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
@@ -39,7 +44,12 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/diary_photo"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintHorizontal_bias="1.0"
+                tools:layout_editor_absoluteX="48dp"
+                tools:layout_editor_absoluteY="15dp" />
 
             <TextView
                 android:id="@+id/body"
@@ -55,7 +65,9 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/diary_photo"
                 app:layout_constraintTop_toBottomOf="@+id/title"
-                tools:text="We challenged ourselves to create a visual language for our users that synthesizes the classic principles of good design with the innovation and possibility of technology and science. This is material design. This spec is a living document that will be updated as we continue to develop the tenets and specifics of material design."/>
+                tools:text="We challenged ourselves to create a visual language for our users that synthesizes the classic principles of good design with the innovation and possibility of technology and science. This is material design. This spec is a living document that will be updated as we continue to develop the tenets and specifics of material design."
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp" />
 
 
             <TextView
@@ -68,7 +80,22 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/diary_photo"
-                app:layout_constraintRight_toRightOf="@+id/diary_photo"/>
+                app:layout_constraintRight_toRightOf="@+id/diary_photo"
+                android:layout_marginEnd="8dp" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/floatingActionButton"
+                android:layout_width="49dp"
+                android:layout_height="37dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                app:elevation="0dp"
+                app:fabSize="mini"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_delete" />
+
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

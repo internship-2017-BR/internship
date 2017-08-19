@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class DiaryRealmAdapter extends
     private Realm mRealm;
 
     public static class DiaryViewHolder extends RecyclerView.ViewHolder {
+        protected long id;
         protected TextView
                 title;
         protected TextView bodyText;
@@ -80,10 +82,11 @@ public class DiaryRealmAdapter extends
     }
 
     @Override
-    public void onBindViewHolder(DiaryViewHolder holder,
+    public void onBindViewHolder(final DiaryViewHolder holder,
                                  final int position) {
 
         Diary diary = getData().get(position);
+        holder.id = diary.id;
         holder.title.setText(diary.title);
         holder.bodyText.setText(diary.bodyText);
         holder.date.setText(diary.date);
@@ -93,14 +96,17 @@ public class DiaryRealmAdapter extends
         }
         holder.floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
 
                 mRealm = Realm.getDefaultInstance();
-                Diary diary = getData().get(position);
-                long diaryId = diary.id;
-                mRealm.beginTransaction();
-                diary.deleteFromRealm();
-                mRealm.commitTransaction();
+                mRealm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        Diary wDairy = realm.where(Diary.class).equalTo("id",holder.id).findFirst();
+                        wDairy.deleteFromRealm();
+                    }
+                });
+
             }
         });
 

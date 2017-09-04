@@ -13,7 +13,8 @@ import java.util.Locale;
 
 import io.realm.Realm;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity
+        extends AppCompatActivity
         implements DiaryListFragment.OnFragmentInteractionListener {
     private Realm mRealm;
 
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-
 
     private void showDiaryList() {
         FragmentManager manager = getSupportFragmentManager();

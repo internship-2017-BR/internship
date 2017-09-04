@@ -33,8 +33,6 @@ public class DiaryListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mRealm = Realm.getDefaultInstance();
-
-
     }
 
     @Override
@@ -95,8 +93,7 @@ public class DiaryListFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_diary_list, menu);
-        MenuItem
-                addDiary = menu.findItem(R.id.menu_item_add_diary);
+        MenuItem addDiary = menu.findItem(R.id.menu_item_add_diary);
         MenuItem deleteAll = menu.findItem(R.id.menu_item_delete_all);
         MyUtils.tintMenuIcon(getContext(), addDiary, android.R.color.white);
         MyUtils.tintMenuIcon(getContext(), deleteAll, android.R.color.white);

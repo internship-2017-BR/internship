@@ -44,22 +44,21 @@ public class DiaryRealmAdapter extends
             bodyText = (TextView) itemView.findViewById(R.id.body);
             date = (TextView) itemView.findViewById(R.id.date);
             photo = (ImageView) itemView.findViewById(R.id.diary_photo);
-            floatingActionButton = (FloatingActionButton)itemView.findViewById(R.id.floatingActionButton);
+            floatingActionButton = (FloatingActionButton) itemView.findViewById(R.id.floatingActionButton);
 
         }
     }
 
-    public DiaryRealmAdapter(@NonNull Context context,
-                             @Nullable
-                                     OrderedRealmCollection<Diary> data,
-                             boolean autoUpdate) {
+    public DiaryRealmAdapter(
+            @NonNull Context context,
+            @Nullable OrderedRealmCollection<Diary> data,
+            boolean autoUpdate) {
         super(data, autoUpdate);
         this.context = context;
     }
 
     @Override
-    public DiaryViewHolder onCreateViewHolder(ViewGroup parent,
-                                              int viewType) {
+    public DiaryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.card_layout, parent, false);
@@ -82,8 +81,9 @@ public class DiaryRealmAdapter extends
     }
 
     @Override
-    public void onBindViewHolder(final DiaryViewHolder holder,
-                                 final int position) {
+    public void onBindViewHolder(
+             final DiaryViewHolder holder,
+             final int position) {
 
         Diary diary = getData().get(position);
         holder.id = diary.id;
@@ -102,7 +102,7 @@ public class DiaryRealmAdapter extends
                 mRealm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        Diary wDairy = realm.where(Diary.class).equalTo("id",holder.id).findFirst();
+                        Diary wDairy = realm.where(Diary.class).equalTo("id", holder.id).findFirst();
                         wDairy.deleteFromRealm();
                     }
                 });

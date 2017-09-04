@@ -84,14 +84,14 @@ public class InputDiaryFragment extends Fragment {
                 requestReadStorage(view);
             }
         });
-        mButton = (Button)v.findViewById(R.id.backButton);
+        mButton = (Button) v.findViewById(R.id.backButton);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
 
-                transaction.replace(R.id.content ,DiaryListFragment.newInstance());
+                transaction.replace(R.id.content, DiaryListFragment.newInstance());
 
                 transaction.commit();
             }

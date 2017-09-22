@@ -70,6 +70,8 @@ public class DiaryRealmAdapter extends
             }
         });
 
+
+        
         return holder;
     }
 

@@ -20,19 +20,18 @@ import io.realm.RealmRecyclerViewAdapter;
 import io.realm.RealmResults;
 
 /**
- * Created by hiroaki on 2017/04/18.
+ * 日記データのリストをもとにrecyclerViewを作成するためのadapter
  */
-
 public class DiaryRealmAdapter extends
         RealmRecyclerViewAdapter<Diary, DiaryRealmAdapter.DiaryViewHolder> {
     Context context;
 
     private Realm mRealm;
 
+    // 日記リストの一つの要素(以降カードと呼ぶ)に表示する項目を定義
     public static class DiaryViewHolder extends RecyclerView.ViewHolder {
         protected long id;
-        protected TextView
-                title;
+        protected TextView title;
         protected TextView bodyText;
         protected TextView date;
         protected ImageView photo;
@@ -57,21 +56,29 @@ public class DiaryRealmAdapter extends
         this.context = context;
     }
 
+    /**
+     * Layoutを設定する
+     * viewHolderが作られたときに呼ばれる処理
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public DiaryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // カードview作成
         View itemView = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.card_layout, parent, false);
         final DiaryViewHolder holder = new DiaryViewHolder(itemView);
 
+        // クリックイベントリスナー
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int position = holder.getAdapterPosition();
                 Diary diary = getData().get(position);
                 long diaryId = diary.id;
-                Intent
-                        intent = new Intent(context, ShowDiaryActivity.class);
+                Intent intent = new Intent(context, ShowDiaryActivity.class);
                 intent.putExtra(ShowDiaryActivity.DIARY_ID, diaryId);
                 context.startActivity(intent);
             }
@@ -80,6 +87,11 @@ public class DiaryRealmAdapter extends
         return holder;
     }
 
+    /**
+     * Layoutの画像や文字を設定する
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(
              final DiaryViewHolder holder,
@@ -94,6 +106,7 @@ public class DiaryRealmAdapter extends
             Bitmap bmp = MyUtils.getImageFromByte(diary.image);
             holder.photo.setImageBitmap(bmp);
         }
+        // 削除ボタンのクリックイベントリスナー実装
         holder.floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {

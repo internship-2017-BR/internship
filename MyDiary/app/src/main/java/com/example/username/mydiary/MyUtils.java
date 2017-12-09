@@ -16,11 +16,16 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Created by hiroaki on 2017/04/18.
+ * 共通関数
  */
 
 public class MyUtils {
 
+    /**
+     *
+     * @param bytes
+     * @return
+     */
     public static Bitmap getImageFromByte(byte[] bytes) {
         BitmapFactory.Options opt = new BitmapFactory.Options();
         opt.inJustDecodeBounds = true;

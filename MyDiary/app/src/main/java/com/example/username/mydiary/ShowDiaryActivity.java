@@ -17,6 +17,9 @@ import android.widget.TextView;
 
 import io.realm.Realm;
 
+/**
+ * 日記参照画面のアクティビティ
+ */
 public class ShowDiaryActivity extends AppCompatActivity {
     public static final String DIARY_ID = "DIARY_ID";
     private static final long ERR_CD = -1;
@@ -27,10 +30,11 @@ public class ShowDiaryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_diary);
+        setContentView(R.layout.activity_show_diary); // 日記参照画面のレイアウトをセット
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // フローティングアクションボタンのオブジェクトを作成し、クリックイベントリスナーを設定
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,20 +45,20 @@ public class ShowDiaryActivity extends AppCompatActivity {
                 startActivity(shareIntent);
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 戻るボタン表示
 
-        mRealm = Realm.getDefaultInstance();
+        mRealm = Realm.getDefaultInstance(); // realm(データベース)インスタンス取得
+        // 日記参照画面を構成している部品をそれぞれ取得
         Intent intent = getIntent();
-
         final long diaryId = intent.getLongExtra(DIARY_ID, ERR_CD);
         TextView body = (TextView) findViewById(R.id.body);
         ImageView imageView = (ImageView) findViewById(R.id.toolbar_image);
-        NestedScrollView
-                scrollView =
+        NestedScrollView scrollView =
                 (NestedScrollView) findViewById(R.id.scroll_view);
+
+        // 表示する項目の値を取得
         Diary diary = mRealm.where(Diary.class).equalTo("id", diaryId).findFirst();
-        CollapsingToolbarLayout
-                layout =
+        CollapsingToolbarLayout layout =
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         layout.setTitle(diary.title);
         mBodyText = diary.bodyText;
@@ -64,6 +68,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
             mBitmap = MyUtils.getImageFromByte(bytes);
             imageView.setImageBitmap(mBitmap);
 
+            // 画像の色味から色を設定
             Palette palette = Palette.from(mBitmap).generate();
             int titleColor = palette.getLightVibrantColor(Color.WHITE);
             int bodyColor = palette.getDarkMutedColor(Color.BLACK);

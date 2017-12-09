@@ -30,7 +30,10 @@ import io.realm.Realm;
 
 import static android.app.Activity.RESULT_OK;
 
-
+/**
+ * 日記作成画面フラグメント
+ *  (DiaryListFragment.javaにコメント記載しているのでそちらを参照)
+ */
 public class InputDiaryFragment extends Fragment {
 
     private static final String DIARY_ID = "DIARY_ID";
@@ -41,8 +44,7 @@ public class InputDiaryFragment extends Fragment {
     private EditText mTitleEdit;
     private EditText mBodyEdit;
     private Button mButton;
-    private ImageView
-            mDiaryImage;
+    private ImageView mDiaryImage;
 
     public static InputDiaryFragment newInstance(long diaryId) {
         InputDiaryFragment fragment = new InputDiaryFragment();
